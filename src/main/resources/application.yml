@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/HibernateAssociationExample
+    username: root
+    password: password
+  jpa:
+    generate-ddl: true
+server:
+  port: 8080
+  servlet:
+    context-path: /HibernateJPAExample
+logging:
+  file: application.log
+  level:
+    root: com.hibernateJPA.HibernateAssociationExample
