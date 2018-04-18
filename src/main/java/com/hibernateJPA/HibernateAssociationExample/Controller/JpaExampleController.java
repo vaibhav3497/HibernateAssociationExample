@@ -1,6 +1,7 @@
 package com.hibernateJPA.HibernateAssociationExample.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hibernateJPA.HibernateAssociationExample.OneToManyUniDirectional.entity.Customer;
 import com.hibernateJPA.HibernateAssociationExample.OneToManyUniDirectional.entity.Phone;
 import com.hibernateJPA.HibernateAssociationExample.OneToManyUniDirectional.service.CustomerServiceI;
+import com.hibernateJPA.HibernateAssociationExample.OneToOneBidirectional.entity.Student;
+import com.hibernateJPA.HibernateAssociationExample.OneToOneBidirectional.service.impl.EnrollmentNumberServiceImpl;
 import com.hibernateJPA.HibernateAssociationExample.OneToOneUnidirectional.entity.Person;
 import com.hibernateJPA.HibernateAssociationExample.OneToOneUnidirectional.service.PersonServiceI;
 
@@ -20,6 +23,9 @@ public class JpaExampleController {
 
 	@Autowired
 	private CustomerServiceI customerSericeI;
+
+	@Autowired
+	private EnrollmentNumberServiceImpl enrollServiceImpl;
 
 	@PostMapping("/add/personRecord/")
 	public void addPerson(@RequestBody Person person) {
@@ -61,6 +67,11 @@ public class JpaExampleController {
 		customer.getContactnumber().add(p1);
 		customer.getContactnumber().add(p2);
 		customerSericeI.addCustomer(customer);
+	}
+
+	@PostMapping("/find/student/{enrollment}")
+	public Student findByEnroll(@PathVariable String enrollment) {
+		return enrollServiceImpl.findByEnrollmentNumber(enrollment);
 	}
 
 }
